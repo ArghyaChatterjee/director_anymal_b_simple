@@ -14,6 +14,34 @@ Director is a flexible, configurable robot user interface which is configured us
 
 ![director](director_overview.png)
 
+# Introduction
+
+The (Robot) Director is an interface for remote command and control of field robots.
+
+It is built within ROS and uses VTK for rendering. Unlike Rviz it is convenient to adapt Director to be tightly integrated with a specific robot. VTK provides a modern scenegraph.
+
+It's built upon a C++ base with the robot specific adaptation done in Python - making development of autonomy quicker.
+
+System Requirements
+-------------------
+
+Currently the software is tested and used on Ubuntu 18.04 and ROS Melodic. ROS provides easy access to dependencies such as:
+
+* PCL 1.8
+* VTK 6.3
+* OpenCV 3.2
+* URDF/Xacro
+* ROS messaging
+
+By design, ROS is only minimally integrated and previous versions did not use ROS at all.
+
+The original upstream (see below) is compatible and tested with MacOSX 10.11. In theory it can run on any platform where VTK and Qt are supported including Windows. It's been used on Ubuntu since 14.04.
+
+# Install Dependency
+```
+sudo apt install qtmultimedia5-dev
+sudo apt install qtbase5-private-dev
+```
 # Cloning and Building
 
 Please refer to the main Director instructions about dependencies and features. This software targets Ubuntu 18.04 and ROS Melodic.
