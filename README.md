@@ -78,7 +78,7 @@ sudo apt install cmake \
 		  qtbase5-private-dev \
                   zlib1g-dev
 		  
-git clone https://gitlab.kitware.com/vtk/vtk.git
+git clone https://github.com/Kitware/VTK.git
 cd vtk
 git checkout tags/v6.3.0
 mkdir build
