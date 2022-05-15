@@ -14,7 +14,7 @@ Director is a flexible, configurable robot user interface which is configured us
 
 ![director](director_overview.png)
 
-# Introduction
+# General Knowledge
 
 The (Robot) Director is an interface for remote command and control of field robots.
 
@@ -37,10 +37,73 @@ By design, ROS is only minimally integrated and previous versions did not use RO
 
 The original upstream (see below) is compatible and tested with MacOSX 10.11. In theory it can run on any platform where VTK and Qt are supported including Windows. It's been used on Ubuntu since 14.04.
 
-# Install Dependency
+# Install PCL
 ```
-sudo apt install qtmultimedia5-dev
-sudo apt install qtbase5-private-dev
+sudo apt install libpcl-dev
+```
+# Install VTK 6.3
+```
+sudo apt install cmake \
+                  libavcodec-dev \
+                  libavformat-dev \
+                  libavutil-dev \
+                  libboost-dev \
+                  libdouble-conversion-dev \
+                  libeigen3-dev \
+                  libexpat1-dev \
+                  libfontconfig-dev \
+                  libfreetype6-dev \
+                  libgdal-dev \
+                  libglew-dev \
+                  libhdf5-dev \
+                  libjpeg-dev \
+                  libjsoncpp-dev \
+                  liblz4-dev \
+                  liblzma-dev \
+                  libnetcdf-dev \
+                  libnetcdf-cxx-legacy-dev \
+                  libogg-dev \
+                  libpng-dev \
+                  libqt5opengl5-dev \
+                  libqt5x11extras5-dev \
+                  libsqlite3-dev \
+                  libswscale-dev \
+                  libtheora-dev \
+                  libtiff-dev \
+                  libxml2-dev \
+                  libxt-dev \
+                  qtbase5-dev \
+                  qttools5-dev \
+		  qtmultimedia5-dev \
+		  qtbase5-private-dev \
+                  zlib1g-dev
+		  
+git clone https://gitlab.kitware.com/vtk/vtk.git
+cd vtk
+git checkout tags/v6.3.0
+mkdir build
+cd build
+ccmake ..
+```
+press "c" to configure. If you get error like `"cc: error: ARGS: No such file or directory`, then change a line inside 2 files `GenerateExportHeader.cmake` and `vtkCompilerExtras.cmake`  from `string(REGEX MATCH "[345]\\.[0-9]\\.[0-9]*"` to `string(REGEX MATCH "[3456789]\\.[0-9]\\.[0-9]*"`.
+
+when looks like the compiler stoped (at 95%) and the it will be written on screen that the compiler has produced the following output, press e to exit the screen. The following screen will be interactive and you can turn different flags to on and off. Make sure to turn of qt plugin to off as it needs qt version 4 for vtk version 6.3.0 to compile. Press "c" again to configure and "g" to generate output. Then do the following:
+```
+make -j4 
+## Compiles the workspace
+
+sudo make install  
+## Installs (copies) the produced libraries and headers inside the system
+```
+
+* For newer version of vtk download and install from source, follow these 2 links: [link1](https://gist.github.com/ArghyaChatterjee/21c74b40eb1e795e949300ca8272866a) and [link2](https://www.cs.purdue.edu/homes/cs530/projects/project0.html)
+* For installing vtk from binaries
+```
+pip install vtk==8.1.0
+## For python version 2
+
+pip3 install vtk==9.1.0
+## For python version 3
 ```
 # Cloning and Building
 
